@@ -1,4 +1,4 @@
-import Link from 'next/link';
+import SubscribeButton from '@/components/SubscribeButton';
 
 export default function Home() {
   return (
@@ -12,9 +12,12 @@ export default function Home() {
           Love doesn't mean soft. Fear doesn't mean weak. Hunger doesn't mean greedy. 
           You just don't know the order yet.
         </p>
-        <button className="bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors">
+        <SubscribeButton 
+          tier="broad"
+          className="bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
+        >
           Join the Waitlist
-        </button>
+        </SubscribeButton>
       </section>
 
       {/* What is LFH Section */}
@@ -73,9 +76,12 @@ export default function Home() {
                   <span>Selected essays from The Envar Local</span>
                 </li>
               </ul>
-              <button className="w-full border-2 border-[#E85D27] text-[#E85D27] hover:bg-[#E85D27] hover:text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+              <SubscribeButton 
+                tier="free"
+                className="w-full border-2 border-[#E85D27] text-[#E85D27] hover:bg-[#E85D27] hover:text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              >
                 Start Free
-              </button>
+              </SubscribeButton>
             </div>
 
             {/* Broad Tier */}
@@ -111,9 +117,12 @@ export default function Home() {
                   <span className="font-semibold">Real accountability — you can be failed</span>
                 </li>
               </ul>
-              <button className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors">
+              <SubscribeButton 
+                tier="broad"
+                className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              >
                 Apply Now
-              </button>
+              </SubscribeButton>
             </div>
           </div>
         </div>
@@ -123,12 +132,12 @@ export default function Home() {
       <footer className="px-6 py-12 bg-white border-t border-gray-200">
         <div className="max-w-4xl mx-auto text-center">
           <div className="flex flex-col md:flex-row justify-center items-center gap-6 mb-6">
-            <Link href="https://www.theenvarlocal.com" className="text-gray-600 hover:text-[#E85D27] transition-colors">
+            <a href="https://www.theenvarlocal.com" className="text-gray-600 hover:text-[#E85D27] transition-colors">
               The Envar Local
-            </Link>
-            <Link href="https://restorationgarage.io" className="text-gray-600 hover:text-[#E85D27] transition-colors">
+            </a>
+            <a href="https://restorationgarage.io" className="text-gray-600 hover:text-[#E85D27] transition-colors">
               Restoration Garage
-            </Link>
+            </a>
           </div>
           <p className="text-gray-500 text-sm">
             © {new Date().getFullYear()} LFH Productions LLC. All rights reserved.
