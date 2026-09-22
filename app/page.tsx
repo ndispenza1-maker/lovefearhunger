@@ -35,12 +35,17 @@ export default function Home() {
               The actual sequence your system runs every single time you make a decision.
             </p>
             <p>
-              Think of it like a refrigeration cycle: compression → condensation → expansion → evaporation. 
-              Miss a step or run them out of order, and the whole system breaks down. 
-              You don't get cold air. You get noise and heat and wasted energy.
+              Think of it like breathing. Inhale → pause → exhale → pause. Your body runs this cycle 
+              thousands of times a day without you thinking about it. The sequence works whether you're 
+              aware of it or not.
             </p>
             <p>
-              Your emotions work the same way. There's an order. Most people are running it backwards.
+              But once you become aware, you can control it. You can slow it down. Speed it up. 
+              Use it deliberately.
+            </p>
+            <p>
+              Your emotions work the same way. There's an order. It's already running. 
+              Most people just don't know they can take the wheel.
             </p>
           </div>
         </div>
