@@ -9,8 +9,7 @@ export default function Home() {
           The Framework You've Been Using Since Birth. Now Learn to Control It.
         </h1>
         <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-          Love doesn't mean soft. Fear doesn't mean weak. Hunger doesn't mean greedy. 
-          You just don't know the order yet.
+          Love doesn't mean Sex. Fear doesn't mean Scared. Hunger doesn't mean you want Food.
         </p>
         <SubscribeButton 
           tier="broad"
