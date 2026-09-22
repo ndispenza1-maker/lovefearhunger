@@ -51,61 +51,109 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Course Section */}
+      {/* Two Tiers Section */}
       <section className="px-6 py-16 bg-[#F7F5F1]">
-        <div className="max-w-3xl mx-auto">
-          <div className="bg-white p-10 rounded-lg border-4 border-[#E85D27] relative">
-            <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#E85D27] text-white px-6 py-2 rounded-full text-sm font-semibold">
-              LIMITED TO 10 PEOPLE
-            </div>
-            
-            <h2 className="font-serif text-4xl font-bold text-gray-900 mb-4 text-center mt-4">
-              LFH Basics
-            </h2>
-            <p className="text-xl text-gray-600 mb-8 text-center">
-              The full implementation course
-            </p>
+        <div className="max-w-6xl mx-auto">
+          <h2 className="font-serif text-4xl md:text-5xl font-bold text-gray-900 mb-4 text-center">
+            Two Ways to Use LFH
+          </h2>
+          <p className="text-xl text-gray-600 mb-12 text-center max-w-3xl mx-auto">
+            The framework works in yourself and in systems. Pick the application that fits where you are.
+          </p>
 
-            <div className="space-y-4 text-lg text-gray-700 mb-10">
-              <div className="flex items-start">
-                <span className="text-[#E85D27] mr-3 text-2xl">•</span>
-                <span>Self-paced core modules teaching the LFH order of operation</span>
-              </div>
-              <div className="flex items-start">
-                <span className="text-[#E85D27] mr-3 text-2xl">•</span>
-                <span>Monthly mandatory accountability calls</span>
-              </div>
-              <div className="flex items-start">
-                <span className="text-[#E85D27] mr-3 text-2xl">•</span>
-                <span>Full access to the Restoration Garage diagnostic tool</span>
-              </div>
-              <div className="flex items-start">
-                <span className="text-[#E85D27] mr-3 text-2xl">•</span>
-                <span>Private community for ongoing support</span>
-              </div>
-              <div className="flex items-start">
-                <span className="text-[#E85D27] mr-3 text-2xl">•</span>
-                <span className="font-semibold">Real accountability — if you don't do the work, you will be removed</span>
-              </div>
-            </div>
-
-            <div className="border-t border-gray-200 pt-8 mb-8">
-              <p className="text-gray-700 text-center mb-6">
-                This is not for everyone. We're looking for people who are ready to do uncomfortable work 
-                and face answers they might not want to hear.
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Broad Tier */}
+            <div className="bg-white p-8 rounded-lg border-2 border-gray-200">
+              <h3 className="font-serif text-3xl font-bold text-gray-900 mb-2">
+                Broad
+              </h3>
+              <p className="text-gray-600 mb-6 text-lg">
+                Self-maintenance via the Restoration Garage
               </p>
-              <p className="text-gray-700 text-center font-semibold">
-                First cohort is free. You're the control group. We'll be watching the data.
+
+              <div className="space-y-3 text-gray-700 mb-8">
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Full access to the Restoration Garage diagnostic tool</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Written guides on recognizing Love, Fear, and Hunger in your decisions</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Case studies from real-world application</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Self-paced — no calls, no mandatory check-ins</span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 mb-6 italic">
+                "Get in. Run the diagnostic. Fix what's broken. Move on."
               </p>
+
+              <SubscribeButton 
+                tier="broad"
+                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              >
+                Join Waitlist - Broad
+              </SubscribeButton>
             </div>
 
-            <SubscribeButton 
-              tier="broad"
-              className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-xl transition-colors"
-            >
-              Apply for LFH Basics
-            </SubscribeButton>
+            {/* Focus Tier */}
+            <div className="bg-white p-8 rounded-lg border-4 border-[#E85D27] relative">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-[#E85D27] text-white px-6 py-2 rounded-full text-sm font-semibold">
+                WHERE THE WORK LIVES
+              </div>
+
+              <h3 className="font-serif text-3xl font-bold text-gray-900 mb-2 mt-2">
+                Focus
+              </h3>
+              <p className="text-gray-600 mb-6 text-lg">
+                LFH applied to markets and wealth generation
+              </p>
+
+              <div className="space-y-3 text-gray-700 mb-8">
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span className="font-semibold">Everything in Broad, plus:</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Trading bot breakdowns — how LFH maps to price action, volume, volatility</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Macro regime analysis (TLT/USO/UUP/SPY → market structure)</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Real-time or weekly: what the bot saw, why it moved, the LFH map</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Watch the pattern work in systems, not just in yourself</span>
+                </div>
+              </div>
+
+              <p className="text-gray-600 mb-6 italic">
+                "The numbers don't lie. Watch LFH extract from the system."
+              </p>
+
+              <SubscribeButton 
+                tier="focus"
+                className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              >
+                Join Waitlist - Focus
+              </SubscribeButton>
+            </div>
           </div>
+
+          <p className="text-center text-gray-600 mt-8">
+            First cohort pricing and launch dates will be announced to the waitlist first.
+          </p>
         </div>
       </section>
 

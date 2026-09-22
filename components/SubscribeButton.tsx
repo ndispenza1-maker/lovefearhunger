@@ -2,25 +2,21 @@
 
 import { useState } from 'react';
 
-export default function SubscribeButton({ 
-  tier, 
-  children, 
-  className 
-}: { 
-  tier: 'free' | 'broad';
+interface SubscribeButtonProps {
+  tier: 'broad' | 'focus';
   children: React.ReactNode;
   className?: string;
-}) {
+}
+
+export default function SubscribeButton({ tier, children, className }: SubscribeButtonProps) {
   const [email, setEmail] = useState('');
-  const [isOpen, setIsOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [showInput, setShowInput] = useState(false);
+  const [status, setStatus] = useState<'idle' | 'loading' | 'success' | 'error'>('idle');
   const [message, setMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
-    setMessage('');
+    setStatus('loading');
 
     try {
       const response = await fetch('/api/subscribe', {
@@ -32,88 +28,60 @@ export default function SubscribeButton({
       const data = await response.json();
 
       if (response.ok) {
-        setIsSuccess(true);
-        setMessage(data.message);
+        setStatus('success');
+        setMessage('You\'re on the list! Check your email to confirm.');
         setEmail('');
         setTimeout(() => {
-          setIsOpen(false);
-          setIsSuccess(false);
+          setShowInput(false);
+          setStatus('idle');
           setMessage('');
         }, 3000);
       } else {
-        setMessage(data.error || 'Something went wrong. Please try again.');
+        setStatus('error');
+        setMessage(data.error || 'Something went wrong. Try again.');
       }
     } catch (error) {
-      setMessage('Network error. Please try again.');
-    } finally {
-      setIsLoading(false);
+      setStatus('error');
+      setMessage('Network error. Check your connection.');
     }
   };
 
-  return (
-    <>
+  if (!showInput) {
+    return (
       <button
-        onClick={() => setIsOpen(true)}
+        onClick={() => setShowInput(true)}
         className={className}
       >
         {children}
       </button>
+    );
+  }
 
-      {isOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-          <div className="bg-white rounded-lg max-w-md w-full p-8 relative">
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-gray-600 text-2xl"
-            >
-              ×
-            </button>
-
-            <h3 className="font-serif text-2xl font-bold text-gray-900 mb-4">
-              {tier === 'broad' ? 'Join the Waitlist' : 'Start Free'}
-            </h3>
-
-            {isSuccess ? (
-              <div className="text-center py-8">
-                <div className="text-[#E85D27] text-5xl mb-4">✓</div>
-                <p className="text-gray-700">{message}</p>
-              </div>
-            ) : (
-              <>
-                <p className="text-gray-600 mb-6">
-                  {tier === 'broad'
-                    ? 'Limited to 10 people. Enter your email to apply.'
-                    : 'Get instant access to the LFH framework introduction.'}
-                </p>
-
-                <form onSubmit={handleSubmit}>
-                  <input
-                    type="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    placeholder="your@email.com"
-                    required
-                    className="w-full px-4 py-3 border-2 border-gray-300 rounded-lg mb-4 focus:border-[#E85D27] focus:outline-none"
-                    disabled={isLoading}
-                  />
-
-                  {message && !isSuccess && (
-                    <p className="text-red-600 text-sm mb-4">{message}</p>
-                  )}
-
-                  <button
-                    type="submit"
-                    disabled={isLoading}
-                    className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-                  >
-                    {isLoading ? 'Submitting...' : tier === 'broad' ? 'Join Waitlist' : 'Get Started'}
-                  </button>
-                </form>
-              </>
-            )}
-          </div>
-        </div>
+  return (
+    <form onSubmit={handleSubmit} className="space-y-3">
+      <div className="flex flex-col sm:flex-row gap-3">
+        <input
+          type="email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          placeholder="your@email.com"
+          required
+          disabled={status === 'loading'}
+          className="flex-1 px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#E85D27] disabled:opacity-50"
+        />
+        <button
+          type="submit"
+          disabled={status === 'loading'}
+          className={`${className} disabled:opacity-50 whitespace-nowrap`}
+        >
+          {status === 'loading' ? 'Subscribing...' : 'Subscribe'}
+        </button>
+      </div>
+      {message && (
+        <p className={`text-sm ${status === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+          {message}
+        </p>
       )}
-    </>
+    </form>
   );
 }

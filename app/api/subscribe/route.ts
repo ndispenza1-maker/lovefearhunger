@@ -37,7 +37,7 @@ export async function POST(request: NextRequest) {
           send_welcome_email: true,
           utm_source: 'lovefearhunger',
           utm_medium: 'website',
-          utm_campaign: tier === 'broad' ? 'broad_waitlist' : 'free_tier',
+          utm_campaign: tier === 'focus' ? 'focus_waitlist' : 'broad_waitlist',
           referring_site: 'lovefearhunger.com',
         }),
       }
