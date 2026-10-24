@@ -13,7 +13,7 @@ export default function Home() {
           href="/signup"
           className="inline-block bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
         >
-          Get Started
+          Join the Waitlist
         </a>
       </section>
 
@@ -102,7 +102,7 @@ export default function Home() {
                 href="/signup"
                 className="block text-center w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
-                Get the Course &mdash; $49.99
+                Coming Soon &mdash; Join Waitlist
               </a>
             </div>
 
@@ -156,6 +156,7 @@ export default function Home() {
               >
                 Get Started &mdash; Contact for Pricing
               </a>
+              <p className="text-xs text-gray-500 mt-2 text-center">Broad course launching soon &mdash; Focused Systems available now</p>
             </div>
           </div>
         </div>
