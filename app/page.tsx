@@ -1,22 +1,20 @@
-import SubscribeButton from '@/components/SubscribeButton';
-
 export default function Home() {
   return (
     <main className="min-h-screen bg-[#F7F5F1]">
       {/* Hero Section */}
       <section className="px-6 py-20 md:py-32 max-w-4xl mx-auto">
         <h1 className="font-serif text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
-          The Framework You've Been Using Since Birth. Now Learn to Control It.
+          The Framework You&rsquo;ve Been Using Since Birth. Now Learn to Control It.
         </h1>
         <p className="text-xl md:text-2xl text-gray-700 mb-8 leading-relaxed">
-          Love doesn't mean Sex. Fear doesn't mean Scared. Hunger doesn't mean you want Food.
+          Love doesn&rsquo;t mean Sex. Fear doesn&rsquo;t mean Scared. Hunger doesn&rsquo;t mean you want Food.
         </p>
-        <SubscribeButton 
-          tier="broad"
-          className="bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
+        <a
+          href="/signup"
+          className="inline-block bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-4 rounded-lg text-lg transition-colors"
         >
-          Join the Waitlist
-        </SubscribeButton>
+          Get Started
+        </a>
       </section>
 
       {/* What is LFH Section */}
@@ -30,21 +28,21 @@ export default function Home() {
               Love leads. Fear informs. Hunger moves.
             </p>
             <p>
-              That's the order of operation for being human. Not philosophy. Not theory. 
+              That&rsquo;s the order of operation for being human. Not philosophy. Not theory.
               The actual sequence your system runs every single time you make a decision.
             </p>
             <p>
-              Think of it like breathing. Inhale → pause → exhale → pause. Your body runs this cycle 
-              thousands of times a day without you thinking about it. The sequence works whether you're 
+              Think of it like breathing. Inhale &rarr; pause &rarr; exhale &rarr; pause. Your body runs this cycle
+              thousands of times a day without you thinking about it. The sequence works whether you&rsquo;re
               aware of it or not.
             </p>
             <p>
-              But once you become aware, you can control it. You can slow it down. Speed it up. 
+              But once you become aware, you can control it. You can slow it down. Speed it up.
               Use it deliberately.
             </p>
             <p>
-              Your emotions work the same way. There's an order. It's already running. 
-              Most people just don't know they can take the wheel.
+              Your emotions work the same way. There&rsquo;s an order. It&rsquo;s already running.
+              Most people just don&rsquo;t know they can take the wheel.
             </p>
           </div>
         </div>
@@ -66,39 +64,42 @@ export default function Home() {
               <h3 className="font-serif text-3xl font-bold text-gray-900 mb-2">
                 Broad
               </h3>
-              <p className="text-gray-600 mb-6 text-lg">
+              <p className="text-[#E85D27] font-semibold text-lg mb-1">
+                $49.99/month
+              </p>
+              <p className="text-gray-600 mb-6">
                 Self-maintenance via the Restoration Garage
               </p>
 
               <div className="space-y-3 text-gray-700 mb-8">
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>4-episode video course &mdash; Love, Fear, and Hunger as forces</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
                   <span>Full access to the Restoration Garage diagnostic tool</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Written guides on recognizing Love, Fear, and Hunger in your decisions</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>YouTube Premium channel &mdash; teaching videos and lectures</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Case studies from real-world application</span>
-                </div>
-                <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Self-paced — no calls, no mandatory check-ins</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>Self-paced &mdash; the course teaches, the Garage is where you work</span>
                 </div>
               </div>
 
               <p className="text-gray-600 mb-6 italic">
-                "Get in. Run the diagnostic. Fix what's broken. Move on."
+                &ldquo;Get in. Run the diagnostic. Fix what&rsquo;s broken. Move on.&rdquo;
               </p>
 
-              <SubscribeButton 
-                tier="broad"
-                className="w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              <a
+                href="/signup"
+                className="block text-center w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
-                Join Waitlist - Broad
-              </SubscribeButton>
+                Subscribe &mdash; $49.99/month
+              </a>
             </div>
 
             {/* Focus Tier */}
@@ -111,33 +112,33 @@ export default function Home() {
                 Focused Systems
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
-                LFH consulting and problem-solving — applied to your niche
+                LFH consulting and problem-solving &mdash; applied to your niche
               </p>
 
               <div className="space-y-3 text-gray-700 mb-8">
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
                   <span className="font-semibold">Everything in Broad, plus the system&rsquo;s full attention on your domain</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Pick your niche — markets, science, business, operations, whatever you&rsquo;re building</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>Pick your niche &mdash; markets, science, business, operations, whatever you&rsquo;re building</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>First consult maps your gap — where the order of operations breaks in your world</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>First consult maps your gap &mdash; where the order of operations breaks in your world</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
                   <span>Custom engagement built around what you actually need, not a one-size package</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
                   <span>For buyers, builders, and anyone who senses something they can&rsquo;t see and doesn&rsquo;t have time to dig</span>
                 </div>
                 <div className="flex items-start">
-                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Available for teams — offer it to your people</span>
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>Available for teams &mdash; offer it to your people</span>
                 </div>
               </div>
 
@@ -145,18 +146,14 @@ export default function Home() {
                 &ldquo;Drop a systems thinker into any operation. Find where it breaks. Build the bridge.&rdquo;
               </p>
 
-              <SubscribeButton 
-                tier="focus"
-                className="w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
+              <a
+                href="/signup"
+                className="block text-center w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
-                Join Waitlist - Focus
-              </SubscribeButton>
+                Get Started &mdash; Contact for Pricing
+              </a>
             </div>
           </div>
-
-          <p className="text-center text-gray-600 mt-8">
-            First cohort pricing and launch dates will be announced to the waitlist first.
-          </p>
         </div>
       </section>
 
@@ -170,9 +167,12 @@ export default function Home() {
             <a href="https://restorationgarage.io" className="text-gray-600 hover:text-[#E85D27] transition-colors">
               Restoration Garage
             </a>
+            <a href="/login" className="text-gray-600 hover:text-[#E85D27] transition-colors">
+              Log In
+            </a>
           </div>
           <p className="text-gray-500 text-sm">
-            © {new Date().getFullYear()} LFH Productions LLC. All rights reserved.
+            &copy; {new Date().getFullYear()} LFH Productions LLC. All rights reserved.
           </p>
         </div>
       </footer>
