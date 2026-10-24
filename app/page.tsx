@@ -108,37 +108,41 @@ export default function Home() {
               </div>
 
               <h3 className="font-serif text-3xl font-bold text-gray-900 mb-2 mt-2">
-                Focus
+                Focused Systems
               </h3>
               <p className="text-gray-600 mb-6 text-lg">
-                LFH applied to markets and wealth generation
+                LFH consulting and problem-solving — applied to your niche
               </p>
 
               <div className="space-y-3 text-gray-700 mb-8">
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span className="font-semibold">Everything in Broad, plus:</span>
+                  <span className="font-semibold">Everything in Broad, plus the system&rsquo;s full attention on your domain</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Trading bot breakdowns — how LFH maps to price action, volume, volatility</span>
+                  <span>Pick your niche — markets, science, business, operations, whatever you&rsquo;re building</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Macro regime analysis (TLT/USO/UUP/SPY → market structure)</span>
+                  <span>First consult maps your gap — where the order of operations breaks in your world</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Real-time or weekly: what the bot saw, why it moved, the LFH map</span>
+                  <span>Custom engagement built around what you actually need, not a one-size package</span>
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">•</span>
-                  <span>Watch the pattern work in systems, not just in yourself</span>
+                  <span>For buyers, builders, and anyone who senses something they can&rsquo;t see and doesn&rsquo;t have time to dig</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">•</span>
+                  <span>Available for teams — offer it to your people</span>
                 </div>
               </div>
 
               <p className="text-gray-600 mb-6 italic">
-                "The numbers don't lie. Watch LFH extract from the system."
+                &ldquo;Drop a systems thinker into any operation. Find where it breaks. Build the bridge.&rdquo;
               </p>
 
               <SubscribeButton 
