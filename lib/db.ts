@@ -21,10 +21,10 @@ export async function initDB() {
       user_id INTEGER REFERENCES users(id),
       tier TEXT NOT NULL DEFAULT 'broad',
       stripe_customer_id TEXT,
-      stripe_subscription_id TEXT,
       status TEXT NOT NULL DEFAULT 'pending',
+      course_access BOOLEAN DEFAULT FALSE,
+      tools_access_end TIMESTAMPTZ,
       started_at TIMESTAMPTZ,
-      current_period_end TIMESTAMPTZ,
       loyalty_eligible BOOLEAN DEFAULT FALSE,
       created_at TIMESTAMPTZ DEFAULT NOW(),
       updated_at TIMESTAMPTZ DEFAULT NOW()

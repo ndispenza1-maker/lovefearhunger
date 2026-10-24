@@ -65,10 +65,10 @@ export default function Home() {
                 Broad
               </h3>
               <p className="text-[#E85D27] font-semibold text-lg mb-1">
-                $49.99/month
+                $49.99 one-time
               </p>
               <p className="text-gray-600 mb-6">
-                Self-maintenance via the Restoration Garage
+                The course + 30 days of tools access
               </p>
 
               <div className="space-y-3 text-gray-700 mb-8">
@@ -86,6 +86,10 @@ export default function Home() {
                 </div>
                 <div className="flex items-start">
                   <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
+                  <span>30 days of Restoration Garage + YouTube channel access included</span>
+                </div>
+                <div className="flex items-start">
+                  <span className="text-[#E85D27] mr-3 text-xl">&bull;</span>
                   <span>Self-paced &mdash; the course teaches, the Garage is where you work</span>
                 </div>
               </div>
@@ -98,7 +102,7 @@ export default function Home() {
                 href="/signup"
                 className="block text-center w-full bg-gray-900 hover:bg-gray-800 text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
-                Subscribe &mdash; $49.99/month
+                Get the Course &mdash; $49.99
               </a>
             </div>
 

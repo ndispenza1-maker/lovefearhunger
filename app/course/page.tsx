@@ -16,7 +16,7 @@ export default function CoursePage() {
           router.push("/login");
           return;
         }
-        if (data.subscription?.status !== "active") {
+        if (!data.subscription?.course_access) {
           router.push("/dashboard");
           return;
         }

@@ -8,8 +8,10 @@ interface UserData {
   subscription: {
     tier: string;
     status: string;
+    course_access: boolean;
+    tools_active: boolean;
+    tools_access_end: string;
     started_at: string;
-    current_period_end: string;
     loyalty_eligible: boolean;
   } | null;
 }
@@ -60,7 +62,12 @@ export default function DashboardPage() {
   }
 
   const sub = data?.subscription;
-  const isActive = sub?.status === "active";
+  const hasCourse = sub?.course_access;
+  const hasTools = sub?.tools_active;
+
+  const daysLeft = sub?.tools_access_end
+    ? Math.max(0, Math.ceil((new Date(sub.tools_access_end).getTime() - Date.now()) / 86400000))
+    : 0;
 
   return (
     <main className="min-h-screen bg-[#F7F5F1] px-6 py-12">
@@ -73,67 +80,63 @@ export default function DashboardPage() {
             </h1>
             <p className="text-gray-600">{data?.user?.email}</p>
           </div>
-          <button
-            onClick={handleLogout}
-            className="text-gray-500 hover:text-gray-700 text-sm"
-          >
+          <button onClick={handleLogout} className="text-gray-500 hover:text-gray-700 text-sm">
             Log out
           </button>
         </div>
 
-        {/* Subscription Status */}
+        {/* Purchase / Access Status */}
         <div className="bg-white p-8 rounded-lg border border-gray-200 mb-8">
           <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">
-            Subscription
+            Your Access
           </h2>
 
-          {isActive ? (
+          {hasCourse ? (
             <div>
+              {/* Course access */}
               <div className="flex items-center gap-3 mb-4">
                 <span className="bg-green-100 text-green-800 text-sm font-semibold px-3 py-1 rounded-full">
-                  Active
+                  Course Unlocked
                 </span>
                 <span className="text-gray-600">
-                  Broad System &mdash; $49.99/month
+                  The Broad System &mdash; 4 episodes
                 </span>
               </div>
 
-              {sub?.started_at && (
-                <p className="text-sm text-gray-500 mb-1">
-                  Member since{" "}
-                  {new Date(sub.started_at).toLocaleDateString("en-US", {
-                    month: "long",
-                    day: "numeric",
-                    year: "numeric",
-                  })}
-                </p>
-              )}
-
-              {sub?.loyalty_eligible && (
-                <div className="mt-4 p-4 bg-[#FFF3E0] border border-[#E85D27] rounded-lg">
-                  <p className="text-[#E85D27] font-semibold">
-                    🎉 Loyalty Unlock Available!
+              {/* Tools access */}
+              {hasTools ? (
+                <div className="p-4 bg-blue-50 border border-blue-200 rounded-lg mb-4">
+                  <p className="text-blue-800 font-semibold">
+                    Restoration Garage + YouTube &mdash; {daysLeft} day{daysLeft !== 1 ? "s" : ""} remaining
                   </p>
-                  <p className="text-sm text-gray-700 mt-1">
-                    You&rsquo;ve been with us 3+ months. Lock in lifetime access
-                    to the Garage + YouTube channel for{" "}
-                    <strong>$14.99/month</strong> &mdash; $10 cheaper than
-                    separate.
+                  <p className="text-sm text-blue-600 mt-1">
+                    Your 30-day access to the Garage and YouTube channel is active.
                   </p>
-                  <button className="mt-3 bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-2 rounded-lg text-sm transition-colors">
-                    Lock In Lifetime Rate
-                  </button>
+                </div>
+              ) : (
+                <div className="p-4 bg-gray-50 border border-gray-200 rounded-lg mb-4">
+                  <p className="text-gray-700 font-semibold">
+                    Garage + YouTube access expired
+                  </p>
+                  <p className="text-sm text-gray-500 mt-1">
+                    Your 30-day tools window has ended. Subscribe to continue using
+                    the Restoration Garage and YouTube channel.
+                  </p>
+                  {sub?.loyalty_eligible && (
+                    <div className="mt-3 p-3 bg-[#FFF3E0] border border-[#E85D27] rounded-lg">
+                      <p className="text-[#E85D27] font-semibold text-sm">
+                        🎉 Loyalty rate available &mdash; $14.99/month lifetime
+                      </p>
+                    </div>
+                  )}
                 </div>
               )}
             </div>
           ) : (
             <div>
               <p className="text-gray-600 mb-4">
-                {sub?.status === "past_due"
-                  ? "Your payment is past due. Update your payment method to regain access."
-                  : sub?.status === "cancelled"
-                  ? "Your subscription has been cancelled."
-                  : "You don't have an active subscription yet."}
+                Get the 4-episode Broad System course + 30 days of Restoration
+                Garage and YouTube channel access.
               </p>
 
               <button
@@ -141,116 +144,60 @@ export default function DashboardPage() {
                 disabled={checkoutLoading}
                 className="bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-8 py-3 rounded-lg transition-colors disabled:opacity-50"
               >
-                {checkoutLoading
-                  ? "Loading..."
-                  : "Subscribe — $49.99/month"}
+                {checkoutLoading ? "Loading..." : "Get the Course \u2014 $49.99"}
               </button>
             </div>
           )}
         </div>
 
-        {/* Course Access */}
+        {/* Course */}
         <div className="bg-white p-8 rounded-lg border border-gray-200">
           <h2 className="font-serif text-2xl font-bold text-gray-900 mb-4">
             The Broad System Course
           </h2>
 
-          {isActive ? (
+          {hasCourse ? (
             <div className="space-y-4">
-              <a
-                href="/course"
-                className="block p-4 border border-gray-200 rounded-lg hover:border-[#E85D27] transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      Episode 1 &mdash; Welcome to the Restoration Garage
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Full walkthrough: signup, login, room tour
-                    </p>
+              {[
+                { n: 1, title: "Welcome to the Restoration Garage", sub: "Full walkthrough: signup, login, room tour" },
+                { n: 2, title: "Love as a Force", sub: "Using the Board Room with Letty" },
+                { n: 3, title: "Fear as a Force", sub: "The instrument, not the enemy" },
+                { n: 4, title: "Hunger as a Force", sub: "What moves when the system won\u2019t" },
+              ].map((ep) => (
+                <a
+                  key={ep.n}
+                  href="/course"
+                  className="block p-4 border border-gray-200 rounded-lg hover:border-[#E85D27] transition-colors"
+                >
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <p className="font-semibold text-gray-900">
+                        Episode {ep.n} &mdash; {ep.title}
+                      </p>
+                      <p className="text-sm text-gray-500">{ep.sub}</p>
+                    </div>
+                    <span className="text-[#E85D27]">&rarr;</span>
                   </div>
-                  <span className="text-[#E85D27]">&rarr;</span>
-                </div>
-              </a>
-
-              <a
-                href="/course"
-                className="block p-4 border border-gray-200 rounded-lg hover:border-[#E85D27] transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      Episode 2 &mdash; Love as a Force
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      Using the Board Room with Letty
-                    </p>
-                  </div>
-                  <span className="text-[#E85D27]">&rarr;</span>
-                </div>
-              </a>
-
-              <a
-                href="/course"
-                className="block p-4 border border-gray-200 rounded-lg hover:border-[#E85D27] transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      Episode 3 &mdash; Fear as a Force
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      The instrument, not the enemy
-                    </p>
-                  </div>
-                  <span className="text-[#E85D27]">&rarr;</span>
-                </div>
-              </a>
-
-              <a
-                href="/course"
-                className="block p-4 border border-gray-200 rounded-lg hover:border-[#E85D27] transition-colors"
-              >
-                <div className="flex items-center justify-between">
-                  <div>
-                    <p className="font-semibold text-gray-900">
-                      Episode 4 &mdash; Hunger as a Force
-                    </p>
-                    <p className="text-sm text-gray-500">
-                      What moves when the system won&rsquo;t
-                    </p>
-                  </div>
-                  <span className="text-[#E85D27]">&rarr;</span>
-                </div>
-              </a>
+                </a>
+              ))}
             </div>
           ) : (
             <p className="text-gray-500">
-              Subscribe to unlock the 4-episode Broad System course and full
-              access to the Restoration Garage.
+              Purchase the course to unlock all 4 episodes and 30 days of tools
+              access.
             </p>
           )}
         </div>
 
         {/* Links */}
         <div className="mt-8 flex gap-6 justify-center">
-          <a
-            href="https://restorationgarage.io"
-            className="text-gray-600 hover:text-[#E85D27] transition-colors"
-          >
+          <a href="https://restorationgarage.io" className="text-gray-600 hover:text-[#E85D27] transition-colors">
             Restoration Garage
           </a>
-          <a
-            href="https://www.theenvarlocal.com"
-            className="text-gray-600 hover:text-[#E85D27] transition-colors"
-          >
+          <a href="https://www.theenvarlocal.com" className="text-gray-600 hover:text-[#E85D27] transition-colors">
             The Envar Local
           </a>
-          <a
-            href="/"
-            className="text-gray-600 hover:text-[#E85D27] transition-colors"
-          >
+          <a href="/" className="text-gray-600 hover:text-[#E85D27] transition-colors">
             Home
           </a>
         </div>

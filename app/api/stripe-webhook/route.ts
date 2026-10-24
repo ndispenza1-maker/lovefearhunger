@@ -24,10 +24,12 @@ export async function POST(request: Request) {
       const userId = session.metadata?.lfh_user_id;
       const tier = session.metadata?.tier || "broad";
       const customerId = session.customer as string;
-      const subscriptionId = session.subscription as string;
 
       if (userId) {
-        // Upsert subscription
+        // Calculate 1 month access window for Garage + YouTube
+        const accessEnd = new Date();
+        accessEnd.setDate(accessEnd.getDate() + 30);
+
         const existing = await pool.query(
           "SELECT id FROM subscriptions WHERE user_id = $1",
           [userId]
@@ -36,62 +38,29 @@ export async function POST(request: Request) {
         if (existing.rows.length > 0) {
           await pool.query(
             `UPDATE subscriptions 
-             SET stripe_customer_id = $1, stripe_subscription_id = $2, 
-                 status = 'active', tier = $3, started_at = NOW(), updated_at = NOW()
+             SET stripe_customer_id = $1, 
+                 status = 'active', tier = $2, started_at = NOW(), 
+                 tools_access_end = $3, course_access = TRUE, updated_at = NOW()
              WHERE user_id = $4`,
-            [customerId, subscriptionId, tier, userId]
+            [customerId, tier, accessEnd.toISOString(), userId]
           );
         } else {
           await pool.query(
-            `INSERT INTO subscriptions (user_id, tier, stripe_customer_id, stripe_subscription_id, status, started_at, updated_at)
-             VALUES ($1, $2, $3, $4, 'active', NOW(), NOW())`,
-            [userId, tier, customerId, subscriptionId]
+            `INSERT INTO subscriptions 
+             (user_id, tier, stripe_customer_id, status, started_at, tools_access_end, course_access, updated_at)
+             VALUES ($1, $2, $3, 'active', NOW(), $4, TRUE, NOW())`,
+            [userId, tier, customerId, accessEnd.toISOString()]
           );
         }
       }
       break;
     }
 
-    case "invoice.paid": {
-      const invoice = event.data.object;
-      const customerId = invoice.customer as string;
-      const periodEnd = invoice.lines?.data?.[0]?.period?.end;
-
-      await pool.query(
-        `UPDATE subscriptions 
-         SET status = 'active', 
-             current_period_end = to_timestamp($1),
-             updated_at = NOW()
-         WHERE stripe_customer_id = $2`,
-        [periodEnd, customerId]
-      );
-
-      // Check loyalty eligibility (3+ months)
-      await pool.query(
-        `UPDATE subscriptions 
-         SET loyalty_eligible = TRUE, updated_at = NOW()
-         WHERE stripe_customer_id = $1 
-           AND started_at <= NOW() - INTERVAL '90 days'
-           AND loyalty_eligible = FALSE`,
-        [customerId]
-      );
-      break;
-    }
-
-    case "invoice.payment_failed": {
-      const invoice = event.data.object;
-      await pool.query(
-        "UPDATE subscriptions SET status = 'past_due', updated_at = NOW() WHERE stripe_customer_id = $1",
-        [invoice.customer]
-      );
-      break;
-    }
-
     case "customer.subscription.deleted": {
       const sub = event.data.object;
       await pool.query(
-        "UPDATE subscriptions SET status = 'cancelled', updated_at = NOW() WHERE stripe_subscription_id = $1",
-        [sub.id]
+        "UPDATE subscriptions SET status = 'expired', updated_at = NOW() WHERE stripe_customer_id = $1",
+        [sub.customer]
       );
       break;
     }

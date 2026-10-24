@@ -15,8 +15,10 @@ export async function GET() {
       ? {
           tier: sub.tier,
           status: sub.status,
+          course_access: sub.course_access,
+          tools_active: sub.tools_active,
+          tools_access_end: sub.tools_access_end,
           started_at: sub.started_at,
-          current_period_end: sub.current_period_end,
           loyalty_eligible: sub.loyalty_eligible,
         }
       : null,

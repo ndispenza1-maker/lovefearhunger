@@ -31,7 +31,7 @@ export async function setSessionCookie(user: User) {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
     sameSite: "lax",
-    maxAge: 30 * 24 * 60 * 60, // 30 days
+    maxAge: 30 * 24 * 60 * 60,
     path: "/",
   });
 }
@@ -50,13 +50,20 @@ export async function clearSession() {
 
 export async function getSubscription(userId: number) {
   const result = await pool.query(
-    `SELECT * FROM subscriptions WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
+    `SELECT *, 
+       CASE WHEN tools_access_end > NOW() THEN TRUE ELSE FALSE END as tools_active
+     FROM subscriptions WHERE user_id = $1 ORDER BY created_at DESC LIMIT 1`,
     [userId]
   );
   return result.rows[0] || null;
 }
 
-export async function isActiveSubscriber(userId: number): Promise<boolean> {
+export async function hasToolsAccess(userId: number): Promise<boolean> {
   const sub = await getSubscription(userId);
-  return sub?.status === "active";
+  return sub?.tools_active === true;
+}
+
+export async function hasCourseAccess(userId: number): Promise<boolean> {
+  const sub = await getSubscription(userId);
+  return sub?.course_access === true;
 }
