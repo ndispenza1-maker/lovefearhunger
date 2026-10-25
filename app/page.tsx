@@ -154,9 +154,8 @@ export default function Home() {
                 href="/signup"
                 className="block text-center w-full bg-[#E85D27] hover:bg-[#d54d17] text-white font-semibold px-6 py-3 rounded-lg transition-colors"
               >
-                Get Started &mdash; Contact for Pricing
+                Coming Soon
               </a>
-              <p className="text-xs text-gray-500 mt-2 text-center">Broad course launching soon &mdash; Focused Systems available now</p>
             </div>
           </div>
         </div>
